@@ -1,2 +1,2 @@
-# serverRender
-node服务端渲染
+# ServerRender
+node服务端渲染示例

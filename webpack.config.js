@@ -1,8 +1,7 @@
 const nodeExternals = require('webpack-node-externals');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
-const webpack = require("webpack");
 
 const rules = [
     {
@@ -16,40 +15,35 @@ const rules = [
     },
     {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true
-            }
-          }
-        ]
-    },
-    {
-        test: /\.(jpg|png|gif|svg|webp)$/,
-        loader: 'url-loader?limit=8000'
-
+        use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+                MiniCssExtractPlugin.loader,
+                'css-loader'
+            ],
+        })
     }
 ];
 
 const client = {
     mode: 'development',
-    entry: path.resolve(__dirname,'./src/client.js'),
-    devtool: 'inline-source-map',
-    devServer: {
-        port: 3000,//控制端口
-        open: true, //是否自动打开默认浏览器
-        contentBase: './dist',
-        hot: true
+    entry: {
+        app: path.resolve(__dirname, './src/client.js')
     },
-    output: {     
-    path: path.resolve(__dirname,'./dist/public'),     
-    filename: 'bundle.js'}, 
+    output: {   
+        publicPath: './',
+        path: path.resolve(__dirname,'./dist/public'),
+        sourceMapFilename: '[file].map',
+        filename: 'bundle.js'}, 
+    resolve: {
+        // Add '.ts' and '.tsx' as resolvable extensions.
+        extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".json"]
+    },
     module: { rules },
     plugins: [
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+        }),
     ]
  };
 

@@ -15,6 +15,9 @@ export class DemoComponet extends React.Component {
         return <div>
             <PageHeader onBack={() => null} title="苏苏的主页" subTitle="welcome to my word!" />
             <Button onClick={this.handleClick}>点击这个按钮</Button>
+            < div className = "testDiv" >
+                这是个有样式的框框
+            </div>
         </div>
     }
 }

@@ -1,13 +1,15 @@
-import React from 'react';
-import { Button, message, PageHeader, Divider  } from "antd";
-import testImg from "./images/icon.svg";
-
-import '!style-loader!css-loader!antd/dist/antd.min.css';
+import React from 'react' 
  
-const App = () => <div>
-    Hello React
-    <img  src={testImg} />
-    <PageHeader onBack={() => null} title="苏苏的主页" subTitle="welcome to my word!" />
-    </div>
+class App extends React.Component {
+    constructor() {
+        super();
+    }
+    render() {
+        return <div>
+            html转pdf.......
+            tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+        </div>
+    }
+}
  
 export default App;
